@@ -101,7 +101,7 @@ html_static_path = ['nstatic']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'GCPtutorialdoc'
+htmlhelp_basename = 'doc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
