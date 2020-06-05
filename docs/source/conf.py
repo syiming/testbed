@@ -19,12 +19,10 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'GCP tutorial'
-copyright = '2020, Xin Liu'
-author = 'Xin Liu'
+project = 'TensorFlow Model Garden Documentation'
 
 # The short X.Y version
-version = ''
+version = '1.0'
 # The full version, including alpha/beta/rc tags
 release = ''
 
