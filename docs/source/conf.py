@@ -20,6 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'TensorFlow Model Garden Documentation'
+copyright = 'Apache 2.0'	
+author = 'Google'
 
 # The short X.Y version
 version = '1.0'
