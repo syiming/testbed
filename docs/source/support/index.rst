@@ -1,7 +1,7 @@
-Google Cloud Platform Tutorial
+Support
 ==============================
 
 .. toctree::
    :maxdepth: 2
 
-   GCP_tutorial
+   support
