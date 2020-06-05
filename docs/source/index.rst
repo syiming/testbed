@@ -18,4 +18,3 @@ TensorFlow Model Garden Documentation
    nlp/index
    vision/index
    support/index
-   gcp/index
