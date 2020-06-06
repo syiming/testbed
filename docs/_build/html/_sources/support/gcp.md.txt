@@ -16,7 +16,7 @@ A [VM](https://cloud.google.com/compute/docs/instances) is an **expensive** oper
 
 [TPU](https://cloud.google.com/tpu/docs) is also **expensive**. When ML program is run on VM, the program uses TPU to accelerate computation for ML models.
 
-## Shut down expensive elements
+## Remember to shut down expensive elements!
 
 As mentioned, VM and TPU are expensive. So we should <span style="color:red">shut down</span> TPU and VM when not using them.
 *   We can shut them down using command lines or web interfaces manually. But we easily forget to do so.
