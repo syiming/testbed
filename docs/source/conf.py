@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'TensorFlow Model Garden Documentation'
-copyright = 'Apache 2.0'	
-author = 'Google'
+project = 'TF Model Garden Documentation'
+copyright = '2020, TF Model Garden'	
+author = 'TF Model Garden'
 
 # The short X.Y version
 version = '1.0'
