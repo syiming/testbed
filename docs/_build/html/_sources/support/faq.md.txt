@@ -2,13 +2,11 @@
 
 ## Object Detection API
 
-### How to train a custom model for object detection using models/official/vision/detection?
+* How to train a custom model for object detection using models/official/vision/detection? [Stack Overflow](https://stackoverflow.com/questions/60519964/how-to-train-a-custom-model-for-object-detection-using-models-official-vision-de), [GitHub Issue]()
+* How to ...
+* How to ...
 
-Answer:
+## TF-Slim
 
-* [Stack Overflow](https://stackoverflow.com/questions/60519964/how-to-train-a-custom-model-for-object-detection-using-models-official-vision-de)
-* [GitHub Issue]()
-
-Related GitHub issues:
-
-* [TBD](https://github.com/tensorflow/models/issues/8634)
+* How to ...
+* How to ...

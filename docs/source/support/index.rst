@@ -1,7 +1,0 @@
-General Tutorials
-======================================
-
-.. toctree::
-   :maxdepth: 2
-
-   gcp

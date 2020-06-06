@@ -97,28 +97,30 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shut-down-expensive-elements">Shut down expensive elements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#walk-through-a-sample-project">Walk through a sample project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-vm">Create a VM</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#open-a-cloud-shell-window">Open a cloud shell window</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-a-variable-for-your-project-s-name">Create a variable for your project’s name</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-your-own-vm">Create your own VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#walk-through-a-sample-project">Walk through a sample project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-vm">Create a VM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#open-a-cloud-shell-window">Open a cloud shell window</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-a-variable-for-your-project-s-name">Create a variable for your project’s name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-your-own-vm">Create your own VM</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-bucket">Create a bucket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#generate-training-dataset">Generate training dataset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#variables-and-directory">Variables and directory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-and-prepare-the-datasets">Download and prepare the datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-bucket">Create a bucket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generate-training-dataset">Generate training dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables-and-directory">Variables and directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#download-and-prepare-the-datasets">Download and prepare the datasets</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#create-tpu">Create TPU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-the-training-script">Run the training script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#manual-shutdown-of-tpu-and-vm">Manual shutdown of TPU and VM</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#by-commnads">By commnads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#by-web-interface">By web interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-tpu">Create TPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-training-script">Run the training script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-shutdown-of-tpu-and-vm">Manual shutdown of TPU and VM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#by-commnads">By commnads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#by-web-interface">By web interface</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#automatic-shutdown">Automatic shutdown</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#start-vm-and-tpu-the-next-time">Start VM and TPU the next time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-shutdown">Automatic shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-vm-and-tpu-the-next-time">Start VM and TPU the next time</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -220,15 +222,14 @@
 <li><p>Run a ML program (training transformer) in VM, accelerated by TPU; store results to buckets</p></li>
 <li><p>Shut down TPU and VM automatically.</p></li>
 </ul>
-</div>
 <div class="section" id="create-a-vm">
-<h2>Create a VM<a class="headerlink" href="#create-a-vm" title="Permalink to this headline">¶</a></h2>
+<h3>Create a VM<a class="headerlink" href="#create-a-vm" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="open-a-cloud-shell-window">
-<h3>Open a cloud shell window<a class="headerlink" href="#open-a-cloud-shell-window" title="Permalink to this headline">¶</a></h3>
+<h4>Open a cloud shell window<a class="headerlink" href="#open-a-cloud-shell-window" title="Permalink to this headline">¶</a></h4>
 <p>From <a class="reference external" href="https://console.cloud.google.com/?cloudshell=true&amp;_ga=2.130633615.148565199.1589727540-1957719261.1589398391">here</a>, you can open a cloud shell window and view the cloud console page at the same time.</p>
 </div>
 <div class="section" id="create-a-variable-for-your-project-s-name">
-<h3>Create a variable for your project’s name<a class="headerlink" href="#create-a-variable-for-your-project-s-name" title="Permalink to this headline">¶</a></h3>
+<h4>Create a variable for your project’s name<a class="headerlink" href="#create-a-variable-for-your-project-s-name" title="Permalink to this headline">¶</a></h4>
 <p>In the bash commands, please change <code class="docutils literal notranslate"><span class="pre">project-name</span></code> to the project ID displayed in the up left side of the console page.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PROJECT_NAME</span><span class="o">=</span>project-name
 gcloud config <span class="nb">set</span> project <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>
@@ -236,7 +237,7 @@ gcloud config <span class="nb">set</span> project <span class="si">${</span><spa
 </div>
 </div>
 <div class="section" id="create-your-own-vm">
-<h3>Create your own VM<a class="headerlink" href="#create-your-own-vm" title="Permalink to this headline">¶</a></h3>
+<h4>Create your own VM<a class="headerlink" href="#create-your-own-vm" title="Permalink to this headline">¶</a></h4>
 <p>Please pay attention to <code class="docutils literal notranslate"><span class="pre">zone</span></code>. Select a zone which is not used by too many people.</p>
 <p>You can see what zones are used by other people by the following navigation: Console page -&gt; Compute Engine -&gt; “TPUs” in the left side bar -&gt; zones.</p>
 <p>You can see the set of zone names by the following navigation: Console page -&gt; Compute Engine -&gt; “Zones” in the left side bar. Pick up a name from here.</p>
@@ -259,16 +260,16 @@ gcloud config <span class="nb">set</span> project <span class="si">${</span><spa
 </div>
 </div>
 <div class="section" id="create-a-bucket">
-<h2>Create a bucket<a class="headerlink" href="#create-a-bucket" title="Permalink to this headline">¶</a></h2>
+<h3>Create a bucket<a class="headerlink" href="#create-a-bucket" title="Permalink to this headline">¶</a></h3>
 <p>In the following command, please specify your own <code class="docutils literal notranslate"><span class="pre">bucket-name</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gsutil mb -p <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> -c standard -l <span class="nv">zone</span><span class="o">=</span>us-central1 -b on gs://bucket-name
 </pre></div>
 </div>
 </div>
 <div class="section" id="generate-training-dataset">
-<h2>Generate training dataset<a class="headerlink" href="#generate-training-dataset" title="Permalink to this headline">¶</a></h2>
+<h3>Generate training dataset<a class="headerlink" href="#generate-training-dataset" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="variables-and-directory">
-<h3>Variables and directory<a class="headerlink" href="#variables-and-directory" title="Permalink to this headline">¶</a></h3>
+<h4>Variables and directory<a class="headerlink" href="#variables-and-directory" title="Permalink to this headline">¶</a></h4>
 <p>For the following command, please specify your own <code class="docutils literal notranslate"><span class="pre">bucket-name</span></code> that you just used.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">STORAGE_BUCKET</span><span class="o">=</span>gs://bucket-name
 <span class="nb">export</span> <span class="nv">PARAM_SET</span><span class="o">=</span>big
@@ -281,7 +282,7 @@ gcloud config <span class="nb">set</span> project <span class="si">${</span><spa
 </div>
 </div>
 <div class="section" id="download-and-prepare-the-datasets">
-<h3>Download and prepare the datasets<a class="headerlink" href="#download-and-prepare-the-datasets" title="Permalink to this headline">¶</a></h3>
+<h4>Download and prepare the datasets<a class="headerlink" href="#download-and-prepare-the-datasets" title="Permalink to this headline">¶</a></h4>
 <p>Download and process data in VM.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/share/models/official/nlp/transformer
 python3 data_download.py --data_dir<span class="o">=</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>
@@ -302,7 +303,7 @@ python3 data_download.py --data_dir<span class="o">=</span><span class="si">${</
 </div>
 </div>
 <div class="section" id="create-tpu">
-<h2>Create TPU<a class="headerlink" href="#create-tpu" title="Permalink to this headline">¶</a></h2>
+<h3>Create TPU<a class="headerlink" href="#create-tpu" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ctpu up --tpu-only <span class="se">\</span>
   --tpu-size<span class="o">=</span>v3-8  <span class="se">\</span>
   --zone<span class="o">=</span>us-central1-b <span class="se">\</span>
@@ -316,7 +317,7 @@ python3 data_download.py --data_dir<span class="o">=</span><span class="si">${</
 </div>
 </div>
 <div class="section" id="run-the-training-script">
-<h2>Run the training script<a class="headerlink" href="#run-the-training-script" title="Permalink to this headline">¶</a></h2>
+<h3>Run the training script<a class="headerlink" href="#run-the-training-script" title="Permalink to this headline">¶</a></h3>
 <p>By following command, the program in VM will read data from bucket to build train transformer model. Then the model results/checkpoints will be stored into bucket.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 transformer_main.py <span class="se">\</span>
     --tpu<span class="o">=</span><span class="si">${</span><span class="nv">TPU_NAME</span><span class="si">}</span> <span class="se">\</span>
@@ -340,9 +341,9 @@ python3 data_download.py --data_dir<span class="o">=</span><span class="si">${</
 <p>Using the above command, we occupy one terminal in VM to run the Python program. However, it is better to let the program run at the backend of the VM, so you don’t need to maintain the SSH connection to VM all the time. The results can be printed in the log, or stored into VM or GCS buckets. <a class="reference external" href="#automatic-shutdown">Later</a>, we will explain how to combine Python and shutdown commands at the backend to achieve automatic shutdown.</p>
 </div>
 <div class="section" id="manual-shutdown-of-tpu-and-vm">
-<h2>Manual shutdown of TPU and VM<a class="headerlink" href="#manual-shutdown-of-tpu-and-vm" title="Permalink to this headline">¶</a></h2>
+<h3>Manual shutdown of TPU and VM<a class="headerlink" href="#manual-shutdown-of-tpu-and-vm" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="by-commnads">
-<h3>By commnads<a class="headerlink" href="#by-commnads" title="Permalink to this headline">¶</a></h3>
+<h4>By commnads<a class="headerlink" href="#by-commnads" title="Permalink to this headline">¶</a></h4>
 <p>Then you can shut down TPU and VM manually by the following commands or by web interface.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ctpu pause --name<span class="o">=</span>transformer-tutorial --zone<span class="o">=</span>us-central1-b
 gcloud compute instances stop transformer-tutorial --zone<span class="o">=</span>us-central1-b
@@ -350,14 +351,14 @@ gcloud compute instances stop transformer-tutorial --zone<span class="o">=</span
 </div>
 </div>
 <div class="section" id="by-web-interface">
-<h3>By web interface<a class="headerlink" href="#by-web-interface" title="Permalink to this headline">¶</a></h3>
+<h4>By web interface<a class="headerlink" href="#by-web-interface" title="Permalink to this headline">¶</a></h4>
 <p>You can also shutdown status of TPU and VM using the web console interface.</p>
 <p>By this navigation: Console page -&gt; Compute Engine -&gt; “TPUs” in the left side bar, you can select “transformer-tutorial” and click “STOP”. You should wait for around 3 minutes to make sure that “transformer-tutorial” <strong>disappears</strong> from this page.</p>
 <p>By this navigation: Console page -&gt; Compute Engine -&gt; “VM instances” in the left side bar, you can select “transformer-tutorial” and click “STOP”. You should wait for around 2 minutes to make sure that the status of “transformer-tutorial” becomes <strong>grey</strong> in this page.</p>
 </div>
 </div>
 <div class="section" id="automatic-shutdown">
-<h2>Automatic shutdown<a class="headerlink" href="#automatic-shutdown" title="Permalink to this headline">¶</a></h2>
+<h3>Automatic shutdown<a class="headerlink" href="#automatic-shutdown" title="Permalink to this headline">¶</a></h3>
 <p>It’s better to let the model run at the backend of the VM, so you don’t need to maintain the connection to VM all the time.</p>
 <p>The results can be printed in the log, or stored into VM or GCS buckets.</p>
 <p>What we are doing here is to put all commands we mentioned into a <a class="reference external" href="https://www.cyberciti.biz/faq/how-to-execute-a-shell-script-in-linux/">bash script</a>: demo.sh</p>
@@ -397,7 +398,7 @@ gcloud compute instances stop transformer-tutorial --zone<span class="o">=</span
 <p>Now you have shut down TPU and VM. Your VM is not deleted. You can start your VM in the future to see your script and Python log in your root directory. What is the correct way to start VM and TPU the next time?</p>
 </div>
 <div class="section" id="start-vm-and-tpu-the-next-time">
-<h2>Start VM and TPU the next time<a class="headerlink" href="#start-vm-and-tpu-the-next-time" title="Permalink to this headline">¶</a></h2>
+<h3>Start VM and TPU the next time<a class="headerlink" href="#start-vm-and-tpu-the-next-time" title="Permalink to this headline">¶</a></h3>
 <p>TPU:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ctpu up --zone<span class="o">=</span>us-central1-b --tf-version<span class="o">=</span>nightly --name<span class="o">=</span>transformer-tutorial --tpu-size<span class="o">=</span>v3-128  --project<span class="o">=</span>cloud-tpu-colab-integration --tpu-only
 </pre></div>
@@ -416,6 +417,7 @@ gcloud compute ssh --project<span class="o">=</span>cloud-tpu-colab-integration 
 <p>Now you are in your root directory again!</p>
 <p>We can also set a budget limit to shutdown VM.</p>
 <p>Markdown (converter) -&gt; Colab folder</p>
+</div>
 </div>
 </div>
 

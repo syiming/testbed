@@ -20,7 +20,7 @@ General Support
 ^^^^^^^^^^^^^^^
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     support/gcp
     support/faq
