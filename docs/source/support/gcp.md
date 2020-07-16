@@ -74,23 +74,23 @@ You should receive credits worth $300 from Google when you first sign up with yo
 
 2. To add project collaborators, click **ADD PEOPLE TO THIS PROJECT**. Add their email and make their role owners.
 
-![](/_img/add-people.png)
+![](_img/add-people.png)
 
 3. **Upgrade your account** in order to use GPUs by following these [instructions](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
 
-![](/_img/upgrade-1.png)
+![](_img/upgrade-1.png)
 
-![](/_img/upgrade-2.png)
+![](_img/upgrade-2.png)
 
 ## Walk through a sample project
 
 Based on [Training transformer on Cloud TPU (TF 2.x)](https://cloud.google.com/tpu/docs/tutorials/transformer-2.x), we provide the following instructions. We are going to:
 
-* Create VM, bucket, TPU
-* Run a ML program (training transformer) in VM, accelerated by TPU; store results to buckets
+* Create VM, bucket and TPU instance.
+* Run a ML program (training transformer) on VM, accelerated by TPU and store results to buckets.
 * Shut down TPU and VM automatically.
 
-### Create a VM
+### Creating a VM
 
 #### Open a cloud shell window
 
@@ -123,11 +123,11 @@ ctpu up --vm-only \
  --name=transformer-tutorial
 ```
 
-Enter y to approve the creation of VM.
+Enter `y` to approve the creation of VM.
 
 <a name="vm-zone"></a> Please remember the zone information in the above command `us-central1-b`. It will be used later when we create TPU.
 
-Now the VM is created and started. The start of the VM triggers the start of charging fees, until the VM is shutdown.
+Now the VM is created and started. **The start of the VM triggers the start of charging fees, until the VM is shutdown**.
 
 Then use the following command to access the VM.
 
@@ -137,16 +137,58 @@ gcloud compute ssh transformer-tutorial --zone=us-central1-b
 
 It will ask you to create a keyphrase for yourself. Just create one.
 
+### Access Your Newly Created VM 
 
-### Create a bucket
+Now that you have created your virtual GCE, you want to be able to connect to it from your computer.
+
+### Install gcloud command-line Tools
+To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, install [Google Cloud SDK](https://cloud.google.com/sdk/docs) that is appropriate for your platform and follow their instructions. 
+
+If `gcloud` command is not in your system path after installation, you can also reference it by its full path `/<DIRECTORY-WHERE-GOOGLE-CLOUD-IS-INSTALLED>/bin/gcloud`. See [this page](https://cloud.google.com/compute/docs/instances/connecting-to-instance "Title") for more detailed instructions.
+
+To ssh into your VM, go to your VM instance details page by clicking on its name. Start the VM instance first. Once it has a green check mark on, click on the drop-down arrow and select `View gcloud command` instead to retrieve the terminal command. It should look like
+
+```bash
+gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "<YOUR_ZONE>" "<YOUR_VM_NAME>"
+```
+
+### Verification
+
+If you have GPU enabled, you should be able to:
+
+* run `nvidia-smi` and see the list of attached GPUs and their usage statistics. Run `watch nvidia-smi` to monitor your GPU usage in real time.
+* inside the `gcloud/` folder, run `python verify_gpu.py`. If your GPU is attached and CUDA is correctly installed, you shouldn't see any error.
+* If you want to use Tensorflow 2.1, run `python test_tf.py`. The script will show you the installed Tensorflow version (2.1.0) and then run a sample MNIST training. You should see around 97% accuracy at the end.
+
+### Using Jupyter Notebook with Google Compute Engine 
+If you wish, you can use Jupyter Notebook to experiment in your projects. Below, we discuss how to run Jupyter Notebook from your GCE instance and connect to it with your local browser.
+
+After you ssh into your VM using the prior instructions, run Jupyter notebook from the folder with your assignment files.
+
+```
+jupyter notebook
+```
+
+The default port is `8888`, specified in `~/.jupyter/jupyter_notebook_config.py`.
+
+You can connect to your Jupyter session from your personal laptop. Check the external ip address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
+
+
+### Transferring Files From Your Instance To Your Computer
+
+For instance, to transfer `file.zip` from GCE instance to your local laptop. There is an [easy command](https://cloud.google.com/sdk/gcloud/reference/compute/scp) for this purpose:
+
+```
+gcloud compute scp <user>@<instance-name>:/path/to/file.zip /local/path
+```
+
+### Creating a bucket
 
 In the following command, please specify your own `bucket-name`
 
 ```bash
 gsutil mb -p ${PROJECT_NAME} -c standard -l zone=us-central1 -b on gs://bucket-name
 ```
-
-
 
 ### Generate training dataset
 
@@ -202,7 +244,7 @@ ctpu up --tpu-only \
 ```
 
 
-Zone here should be the same as what you have set [at VM creation](#vm-zone).
+**Zone here should be the same as what you have set [at VM creation](#vm-zone)**.
 
 After executing the command, TPU name will be the same as your VM’s name. Let’s also set it to environmental variable.
 
@@ -235,13 +277,15 @@ python3 transformer_main.py \
     --distribution_strategy=tpu
 ```
 
-Using the above command, we occupy one terminal in VM to run the Python program. However, it is better to let the program run at the backend of the VM, so you don’t need to maintain the SSH connection to VM all the time. The results can be printed in the log, or stored into VM or GCS buckets. [Later](#automatic-shutdown), we will explain how to combine Python and shutdown commands at the backend to achieve automatic shutdown.
+Using the above command, we occupy one terminal in VM to run the Python program. However, it is better to let the program run at the backend of the VM, so you don’t need to maintain the SSH connection to VM all the time. The results can be printed in the log, or stored into VM or GCS buckets. 
+
+[Later](#automatic-shutdown), we will explain how to combine Python and shutdown commands at the backend to achieve automatic shutdown.
 
 ### Manual shutdown of TPU and VM
 
-#### By commnads
-Then you can shut down TPU and VM manually by the following commands or by web interface.
+#### By commands
 
+Then you can shut down TPU and VM manually by the following commands or by web interface.
 
 ```bash
 ctpu pause --name=transformer-tutorial --zone=us-central1-b
@@ -249,6 +293,7 @@ gcloud compute instances stop transformer-tutorial --zone=us-central1-b
 ```
 
 #### By web interface
+
 You can also shutdown status of TPU and VM using the web console interface.
 
 By this navigation: Console page -> Compute Engine -> “TPUs” in the left side bar, you can select "transformer-tutorial" and click "STOP". You should wait for around 3 minutes to make sure that "transformer-tutorial" **disappears** from this page.
@@ -324,6 +369,17 @@ gcloud compute ssh --project=cloud-tpu-colab-integration --zone=us-central1-b $I
 ```
 Now you are in your root directory again!
 
-We can also set a budget limit to shutdown VM.
+## Other Tips
+You can use [Tmux](https://linuxize.com/post/getting-started-with-tmux/) to keep the training sessions running when you close your laptop. Also, if your collaborators log into the same account on the VM instance, they will see the same tmux session screen in real time. 
 
-Markdown (converter) -> Colab folder
+You can develop your code on remote server directly if you are comfortable with vim or emacs.
+
+You can develop locally on your favorite editor, push to your branch on Github, and pull on remote server to run.
+
+Besides `gcloud compute scp`, another tool you can check out is [rsync](https://linuxize.com/post/how-to-use-rsync-for-local-and-remote-data-transfer-and-synchronization/) which can synchronize files and folders between your local machine and remote server.
+
+## REMINDER: Make sure you stop your instances!
+
+Don't forget to stop your instance when you are done (by clicking on the stop button at the top of the page showing your instances, or by the other methods listed above). You can restart your instance and the downloaded software will still be available.
+
+We have seen students who left their instances running for many days and ran out of credits. You will be charged per hour when your instance is running. This includes code development time. We encourage you to read up on Google Cloud and regularly keep track of your credits.
