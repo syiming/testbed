@@ -46,6 +46,42 @@ As mentioned, VM's and TPU's are expensive. So we should <span style="color:red"
 *   We can shut them down using command lines or web interfaces manually. But we easily forget to do so.
 *   We will provide instructions on shutting them down automatically by [a script below](#automatic-shutdown).
 
+## Create and configure account
+
+This section wil contain detailed procedures to sign up for the first time and configuring projects. Upgrading accounts and adding people to projects for collaboration will also be mentioned.
+
+### Sign up to GCP for the first time
+
+You should receive credits worth $300 from Google when you first sign up with your personal Gmail address and upgrade to a full account. Please use the resources judiciously.
+
+1. Create Google Cloud account by going to the [Google Cloud homepage](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2015-q2-cloud-na-gcp-skws-freetrial-en&gclid=CP2e4PPpiNMCFU9bfgodGHsA1A "Title"). Click on the blue **Get Started for free** button. Sign into your Gmail account. Here is an illustrative example.
+
+![](_img/launching-screen.png)
+
+2. Choose **Account type** to be **Individual**. You will then fill in your name, address and credit card information.
+
+![](_img/register-info.png)
+
+3. Click the "Google Cloud Platform" (in red circle), and it will take you to the main project dashboard.
+
+![](_img/welcome-screen.png)
+
+### Configure Your Project 
+
+1. On the main project dashboard, you can change the name of your project by clicking **Go to project settings**.
+
+![](_img/dashboard-screen.png)
+
+2. To add project collaborators, click **ADD PEOPLE TO THIS PROJECT**. Add their email and make their role owners.
+
+![](/_img/add-people.png)
+
+3. **Upgrade your account** in order to use GPUs by following these [instructions](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
+
+![](/_img/upgrade-1.png)
+
+![](/_img/upgrade-2.png)
+
 ## Walk through a sample project
 
 Based on [Training transformer on Cloud TPU (TF 2.x)](https://cloud.google.com/tpu/docs/tutorials/transformer-2.x), we provide the following instructions. We are going to:
