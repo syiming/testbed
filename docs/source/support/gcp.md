@@ -382,4 +382,4 @@ Besides `gcloud compute scp`, another tool you can check out is [rsync](https://
 
 Don't forget to stop your instance when you are done (by clicking on the stop button at the top of the page showing your instances, or by the other methods listed above). You can restart your instance and the downloaded software will still be available.
 
-We have seen students who left their instances running for many days and ran out of credits. You will be charged per hour when your instance is running. This includes code development time. We encourage you to read up on Google Cloud and regularly keep track of your credits.
+You will be charged per hour when your instance is running. This includes code development time. We encourage you to read up on Google Cloud and regularly keep track of your credits.
