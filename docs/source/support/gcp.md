@@ -1,5 +1,19 @@
 # Get started with Google Cloud Platform
 
+## Reminder: STOP YOUR INSTANCES
+
+We've put this reminder in the beginning to both emphasize the importance and to remind users first thing when they open the guide.
+
+_**Stopping instances** is very important and can be done by clicking on the stop button at the top of the page showing your instances._ Otherwise, you **will run out of credits**. More details about this below.
+
+## Overview
+
+This section will explain the advantages of using Google Cloud Platform and introduce essential elements required. Information about how to shut down expensive components will also be discussed.
+
+### Colab vs. GCP
+
+
+
 There are 3 basic elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM) and TPU.
 
 ## Overview
