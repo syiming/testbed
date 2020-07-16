@@ -12,27 +12,37 @@ This section will explain the advantages of using Google Cloud Platform and intr
 
 ### Colab vs. GCP
 
+While Colab is good for assignments, and is still a helpful and free tool for experimentation for your project, you will likely need a dedicated GPU instance when you start training on large datasets and collaborating as a team:
 
+* Colab will disconnect after 12 hours or ~30 min of idling (and you will lose your unsaved data). A GCP VM instance will not disconnect untill you stop it (or run out of credits).
+
+* A GCP VM instance's disk space allows you to deal with larger datasets. In Colab's case, you will have to save all your data and models to Google Drive.
+
+* Colab does not innately support real-time collaboration.
+
+* You can choose your GPU models and can set >1 GPUs for distributed training on GCP.
+
+The ideal way is to use both efficiently, For example, use Colab to ensure that the model is converging before spinning up the GCP resources.
+
+### Key elements of GCP
 
 There are 3 basic elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM) and TPU.
 
-## Overview
-
-### Bucket
+#### Bucket
 
 [A bucket](https://cloud.google.com/storage/docs/key-terms#buckets) is a stable storage space to store data.
 
-### Virtual Machine (VM)
+#### Virtual Machine (VM)
 
-A [VM](https://cloud.google.com/compute/docs/instances) is an **expensive** operating system. We run Python ML program from VM. VM can read the data from buckets to build an ML model. We can store the results of our model to buckets.
+A [VM](https://cloud.google.com/compute/docs/instances) is an **expensive** operating system. We run machine learning Python programs from our VM's. Virtual machines can read the data from buckets to build an ML model. We can store the results of our model to buckets.
 
-### TPU
+#### TPU
 
-[TPU](https://cloud.google.com/tpu/docs) is also **expensive**. When ML program is run on VM, the program uses TPU to accelerate computation for ML models.
+[TPU](https://cloud.google.com/tpu/docs) is also **expensive**. When ML programs are run on VM's, the program uses TPU to accelerate computation for ML models.
 
-## Remember to shut down expensive elements!
+### Shutting down expensive elements!
 
-As mentioned, VM and TPU are expensive. So we should <span style="color:red">shut down</span> TPU and VM when not using them.
+As mentioned, VM's and TPU's are expensive. So we should <span style="color:red">shut down</span> TPU and VM when  we're not using them.
 *   We can shut them down using command lines or web interfaces manually. But we easily forget to do so.
 *   We will provide instructions on shutting them down automatically by [a script below](#automatic-shutdown).
 
