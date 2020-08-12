@@ -23,5 +23,5 @@ General Support
     :maxdepth: 2
 
     support/gcp
-    support/faq
+
 
