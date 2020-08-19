@@ -1,5 +1,11 @@
 # Get started with Google Cloud Platform
 
+
+
+[toc]
+
+
+
 ## Reminder: STOP YOUR INSTANCES
 
 We've put this reminder in the beginning to both emphasize the importance and to remind users first thing when they open the guide.
