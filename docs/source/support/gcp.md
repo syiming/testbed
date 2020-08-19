@@ -1,16 +1,12 @@
 # Get started with Google Cloud Platform
 
-
-
-[toc]
-
-
-
 ## Reminder: STOP YOUR INSTANCES
 
-We've put this reminder in the beginning to both emphasize the importance and to remind users first thing when they open the guide.
+We've put this reminder at the beginning to both emphasize the importance and to remind users first thing when they open the guide.
 
 _**Stopping instances** is very important and can be done by clicking on the stop button at the top of the page showing your instances._ Otherwise, you **will run out of credits**. More details about this below.
+
+
 
 ## Overview
 
