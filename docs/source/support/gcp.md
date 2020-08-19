@@ -18,9 +18,9 @@ This section will explain the advantages of using Google Cloud Platform and intr
 
 ### Colab vs. GCP
 
-While Colab is good for assignments, and is still a helpful and free tool for experimentation for your project, you will likely need a dedicated GPU instance when you start training on large datasets and collaborating as a team:
+While Colab is good for assignments and is still a helpful and free tool for experimentation for your project, you will likely need a dedicated GPU instance when you start training on large datasets and collaborating as a team:
 
-* Colab will disconnect after 12 hours or ~30 min of idling (and you will lose your unsaved data). A GCP VM instance will not disconnect untill you stop it (or run out of credits).
+* Colab will disconnect after 12 hours or ~30 min of idling (and you will lose your unsaved data). A GCP VM instance will not disconnect until you stop it (or run out of credits).
 
 * A GCP VM instance's disk space allows you to deal with larger datasets. In Colab's case, you will have to save all your data and models to Google Drive.
 
@@ -32,7 +32,7 @@ The ideal way is to use both efficiently, For example, use Colab to ensure that 
 
 ### Key elements of GCP
 
-There are 3 basic elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM) and TPU.
+There are 3 basic elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM), and TPU.
 
 #### Bucket
 
@@ -54,17 +54,17 @@ As mentioned, VM's and TPU's are expensive. So we should <span style="color:red"
 
 ## Create and configure account
 
-This section wil contain detailed procedures to sign up for the first time and configuring projects. Upgrading accounts and adding people to projects for collaboration will also be mentioned.
+This section will contain detailed procedures to sign up for the first time and configuring projects. Upgrading accounts and adding people to projects for collaboration will also be mentioned.
 
 ### Sign up to GCP for the first time
 
 You should receive credits worth $300 from Google when you first sign up with your personal Gmail address and upgrade to a full account. Please use the resources judiciously.
 
-1. Create Google Cloud account by going to the [Google Cloud homepage](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2015-q2-cloud-na-gcp-skws-freetrial-en&gclid=CP2e4PPpiNMCFU9bfgodGHsA1A "Title"). Click on the blue **Get Started for free** button. Sign into your Gmail account. Here is an illustrative example.
+1. Create Google Cloud account by going to the [Google Cloud homepage](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2015-q2-cloud-na-gcp-skws-freetrial-en&gclid=CP2e4PPpiNMCFU9bfgodGHsA1A "Title"). Click on the blue **Get Started for free** button. Sign in your Gmail account. Here is an illustrative example.
 
 ![](_img/launching-screen.png)
 
-2. Choose **Account type** to be **Individual**. You will then fill in your name, address and credit card information.
+2. Choose **Account type** to be **Individual**. You will then fill in your name, address, and credit card information.
 
 ![](_img/register-info.png)
 
@@ -82,7 +82,7 @@ You should receive credits worth $300 from Google when you first sign up with yo
 
 ![](_img/add-people.png)
 
-3. **Upgrade your account** in order to use GPUs by following these [instructions](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
+3. **Upgrade your account** to use GPUs by following these [instructions](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise, [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
 
 ![](_img/upgrade-1.png)
 
@@ -92,8 +92,8 @@ You should receive credits worth $300 from Google when you first sign up with yo
 
 Based on [Training transformer on Cloud TPU (TF 2.x)](https://cloud.google.com/tpu/docs/tutorials/transformer-2.x), we provide the following instructions. We are going to:
 
-* Create VM, bucket and TPU instance.
-* Run a ML program (training transformer) on VM, accelerated by TPU and store results to buckets.
+* Create VM, bucket, and TPU instance.
+* Run an ML program (training transformer) on VM, accelerated by TPU, and store results to buckets.
 * Shut down TPU and VM automatically.
 
 ### Creating a VM
@@ -113,11 +113,11 @@ gcloud config set project ${PROJECT_NAME}
 
 #### Create your own VM
 
-Please pay attention to `zone`. Select a zone which is not used by too many people.
+Please pay attention to `zone`. Select a zone that is not used by too many people.
 
-You can see what zones are used by other people by the following navigation: Console page -> Compute Engine -> “TPUs” in the left side bar -> zones.
+You can see what zones are used by other people by the following navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar -> zones.
 
-You can see the set of zone names by the following navigation: Console page -> Compute Engine -> “Zones” in the left side bar. Pick up a name from here.
+You can see the set of zone names by the following navigation: Console page -> Compute Engine -> “Zones” in the left sidebar. Pick up a name from here.
 
 
 ```bash
@@ -141,18 +141,18 @@ Then use the following command to access the VM.
 gcloud compute ssh transformer-tutorial --zone=us-central1-b
 ```
 
-It will ask you to create a keyphrase for yourself. Just create one.
+It will ask you to create a key phrase for yourself. Just create one.
 
 ### Access Your Newly Created VM 
 
 Now that you have created your virtual GCE, you want to be able to connect to it from your computer.
 
 ### Install gcloud command-line Tools
-To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, install [Google Cloud SDK](https://cloud.google.com/sdk/docs) that is appropriate for your platform and follow their instructions. 
+To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, install [Google Cloud SDK](https://cloud.google.com/sdk/docs) that is appropriate for your platform, and follow their instructions. 
 
-If `gcloud` command is not in your system path after installation, you can also reference it by its full path `/<DIRECTORY-WHERE-GOOGLE-CLOUD-IS-INSTALLED>/bin/gcloud`. See [this page](https://cloud.google.com/compute/docs/instances/connecting-to-instance "Title") for more detailed instructions.
+If the `gcloud` command is not in your system path after installation, you can also reference it by its full path `/<DIRECTORY-WHERE-GOOGLE-CLOUD-IS-INSTALLED>/bin/gcloud`. See [this page](https://cloud.google.com/compute/docs/instances/connecting-to-instance "Title") for more detailed instructions.
 
-To ssh into your VM, go to your VM instance details page by clicking on its name. Start the VM instance first. Once it has a green check mark on, click on the drop-down arrow and select `View gcloud command` instead to retrieve the terminal command. It should look like
+To ssh into your VM, go to your VM instance details page by clicking on its name. Start the VM instance first. Once it has a green checkmark on, click on the drop-down arrow and select `View gcloud command` instead to retrieve the terminal command. It should look like
 
 ```bash
 gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "<YOUR_ZONE>" "<YOUR_VM_NAME>"
@@ -162,7 +162,7 @@ gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "<YOUR_ZONE>" "<YOUR_VM_
 
 If you have GPU enabled, you should be able to:
 
-* run `nvidia-smi` and see the list of attached GPUs and their usage statistics. Run `watch nvidia-smi` to monitor your GPU usage in real time.
+* run `nvidia-smi` and see the list of attached GPUs and their usage statistics. Run `watch nvidia-smi` to monitor your GPU usage in real-time.
 * inside the `gcloud/` folder, run `python verify_gpu.py`. If your GPU is attached and CUDA is correctly installed, you shouldn't see any error.
 * If you want to use Tensorflow 2.1, run `python test_tf.py`. The script will show you the installed Tensorflow version (2.1.0) and then run a sample MNIST training. You should see around 97% accuracy at the end.
 
@@ -177,7 +177,7 @@ jupyter notebook
 
 The default port is `8888`, specified in `~/.jupyter/jupyter_notebook_config.py`.
 
-You can connect to your Jupyter session from your personal laptop. Check the external ip address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
+You can connect to your Jupyter session from your laptop. Check the external IP address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
 
 
 ### Transferring Files From Your Instance To Your Computer
@@ -190,7 +190,7 @@ gcloud compute scp <user>@<instance-name>:/path/to/file.zip /local/path
 
 ### Creating a bucket
 
-In the following command, please specify your own `bucket-name`
+In the following command, please specify your  `bucket-name`
 
 ```bash
 gsutil mb -p ${PROJECT_NAME} -c standard -l zone=us-central1 -b on gs://bucket-name
@@ -200,7 +200,7 @@ gsutil mb -p ${PROJECT_NAME} -c standard -l zone=us-central1 -b on gs://bucket-n
 
 #### Variables and directory
 
-For the following command, please specify your own `bucket-name` that you just used.
+For the following command, please specify your  `bucket-name` that you just used.
 
 
 ```bash
@@ -252,7 +252,7 @@ ctpu up --tpu-only \
 
 **Zone here should be the same as what you have set [at VM creation](#vm-zone)**.
 
-After executing the command, TPU name will be the same as your VM’s name. Let’s also set it to environmental variable.
+After executing the command, the TPU name will be the same as your VM’s name. Let’s also set it as an environmental variable.
 
 
 ```bash
@@ -261,7 +261,7 @@ export TPU_NAME=transformer-tutorial
 
 ### Run the training script
 
-By following command, the program in VM will read data from bucket to build train transformer model. Then the model results/checkpoints will be stored into bucket.
+By the following command, the program in VM will read data from bucket to build and train the transformer model. Then the model results/checkpoints will be stored into bucket.
 
 ```bash
 python3 transformer_main.py \
@@ -291,7 +291,7 @@ Using the above command, we occupy one terminal in VM to run the Python program.
 
 #### By commands
 
-Then you can shut down TPU and VM manually by the following commands or by web interface.
+Then you can shut down TPU and VM manually by the following commands or by the web interface.
 
 ```bash
 ctpu pause --name=transformer-tutorial --zone=us-central1-b
@@ -300,11 +300,11 @@ gcloud compute instances stop transformer-tutorial --zone=us-central1-b
 
 #### By web interface
 
-You can also shutdown status of TPU and VM using the web console interface.
+You can also shutdown TPU and VM using the web console interface.
 
-By this navigation: Console page -> Compute Engine -> “TPUs” in the left side bar, you can select "transformer-tutorial" and click "STOP". You should wait for around 3 minutes to make sure that "transformer-tutorial" **disappears** from this page.
+By this navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 3 minutes to make sure that "transformer-tutorial" **disappears** from this page.
 
-By this navigation: Console page -> Compute Engine -> “VM instances” in the left side bar, you can select "transformer-tutorial" and click "STOP". You should wait for around 2 minutes to make sure that the status of "transformer-tutorial" becomes **grey** in this page.
+By this navigation: Console page -> Compute Engine -> “VM instances” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 2 minutes to make sure that the status of "transformer-tutorial" becomes **grey** on this page.
 
 ### Automatic shutdown
 
@@ -344,7 +344,7 @@ ctpu pause --name=transformer-tutorial --zone=us-central1-b
 gcloud compute instances stop transformer-tutorial --zone=us-central1-b
 ```
 
-After editing demo.sh, we go back to the cloud shell and execute the following command. Then the program will start to run at the backend of VM. Then it will shut dow TPU and VM after the program is finished.
+After editing the demo.sh, we go back to the cloud shell and execute the following command. Then the program will start to run at the backend of VM. Then it will shut down TPU and VM after the program is finished.
 
 ```bash
 printf 'y\n' | nohup ./demo.sh &> ~/demo.log &
@@ -376,13 +376,13 @@ gcloud compute ssh --project=cloud-tpu-colab-integration --zone=us-central1-b $I
 Now you are in your root directory again!
 
 ## Other Tips
-You can use [Tmux](https://linuxize.com/post/getting-started-with-tmux/) to keep the training sessions running when you close your laptop. Also, if your collaborators log into the same account on the VM instance, they will see the same tmux session screen in real time. 
+You can use [Tmux](https://linuxize.com/post/getting-started-with-tmux/) to keep the training sessions running when you close your laptop. Also, if your collaborators log into the same account on the VM instance, they will see the same tmux session screen in real-time. 
 
-You can develop your code on remote server directly if you are comfortable with vim or emacs.
+You can develop your code on the remote server directly if you are comfortable with vim or emacs.
 
-You can develop locally on your favorite editor, push to your branch on Github, and pull on remote server to run.
+You can develop locally on your favorite editor, push to your branch on Github, and pull on the remote server to run.
 
-Besides `gcloud compute scp`, another tool you can check out is [rsync](https://linuxize.com/post/how-to-use-rsync-for-local-and-remote-data-transfer-and-synchronization/) which can synchronize files and folders between your local machine and remote server.
+Besides `gcloud compute scp`, another tool you can check out is [rsync](https://linuxize.com/post/how-to-use-rsync-for-local-and-remote-data-transfer-and-synchronization/) which can synchronize files and folders between your local machine and the remote server.
 
 ## REMINDER: Make sure you stop your instances!
 
