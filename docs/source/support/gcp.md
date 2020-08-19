@@ -137,7 +137,7 @@ Then use the following command to access the VM.
 gcloud compute ssh transformer-tutorial --zone=us-central1-b
 ```
 
-It will ask you to create a key phrase for yourself. Just create one.
+It will ask you to create a rsa key pair for yourself. Just create one.
 
 ### Access Your Newly Created VM 
 
