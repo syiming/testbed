@@ -330,7 +330,21 @@ echo "Python started!"
 echo "at $(date)"
 
 python3 data_download.py --data_dir=${DATA_DIR}
-python3 transformer_main.py --tpu=${TPU_NAME}  --model_dir=${MODEL_DIR}  --data_dir=${GCS_DATA_DIR} --vocab_file=${GCS_DATA_DIR}/vocab.ende.32768 --bleu_source=${GCS_DATA_DIR}/newstest2014.en --bleu_ref=${GCS_DATA_DIR}/newstest2014.de  --batch_size=6144  --train_steps=2000 --static_batch=true --use_ctl=true  --param_set=big --max_length=64 --decode_batch_size=32 --decode_max_length=97 --padded_decode=true --distribution_strategy=tpu &> ~/transformer_main.log
+python3 transformer_main.py --tpu=${TPU_NAME} \
+														--model_dir=${MODEL_DIR} \ 
+														--data_dir=${GCS_DATA_DIR} \
+														--vocab_file=${GCS_DATA_DIR}/vocab.ende.32768 \
+														--bleu_source=${GCS_DATA_DIR}/newstest2014.en \
+														--bleu_ref=${GCS_DATA_DIR}/newstest2014.de  \
+														--batch_size=6144  --train_steps=2000 \
+														--static_batch=true \
+														--use_ctl=true  \
+														--param_set=big \
+														--max_length=64 \
+														--decode_batch_size=32 \
+														--decode_max_length=97 \
+														--padded_decode=true \
+														--distribution_strategy=tpu &> ~/transformer_main.log
 
 echo "Python finished!"
 echo "at $(date)"
