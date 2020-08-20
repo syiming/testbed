@@ -4,67 +4,67 @@
 
 We've put this reminder at the beginning to both emphasize the importance and to remind users first thing when they open the guide.
 
+You will use instances such as TPUs and VMs a lot on Google Cloud Platform. These instances are expensive and will cost a large amount of money if you don't shut them down in time.
+
 _**Stopping instances** is very important and can be done by clicking on the stop button at the top of the page showing your instances._ Otherwise, you **will run out of credits**. More details about this below.
-
-
 
 ## Overview
 
-This section will explain the advantages of using Google Cloud Platform and introduce essential elements required. Information about how to shut down expensive components will also be discussed.
+This section explains the advantages of using Google Cloud Platform (GCP) and introduces essential elements you will use. Information about how to shut down expensive components is also included.
 
 ### Colab vs. GCP
 
-While Colab is good for assignments and is still a helpful and free tool for experimentation for your project, you will likely need a dedicated GPU instance when you start training on large datasets and collaborating as a team:
+Colab is a helpful and free tool for both assignments and experimentation for your project, while on GCP you can choose a dedicated GPU instance when you start training on large datasets and collaborate as a team more easily:
 
-* Colab will disconnect after 12 hours or ~30 min of idling (and you will lose your unsaved data). A GCP VM instance will not disconnect until you stop it (or run out of credits).
+* Colab will automatically disconnect after 12 hours or ~30 min of idling (and you will lose your unsaved data). GCP Virtual Machine instances will not disconnect until you stop it (or run out of credits).
 
-* A GCP VM instance's disk space allows you to deal with larger datasets. In Colab's case, you will have to save all your data and models to Google Drive.
+* Using Colab, you will have to save all your data and models to Google Drive. GCP Virtual Machine instances have large disk space which allows you to deal with larger datasets.
 
 * Colab does not innately support real-time collaboration.
 
-* You can choose your GPU models and can set >1 GPUs for distributed training on GCP.
+* On GCP, You can choose GPU types (eg. NVIDIA Tesla k80, NVIDIA Tesla P4, etc.) and can use multiple GPUs for distributed training.
 
-The ideal way is to use both efficiently, For example, use Colab to ensure that the model is converging before spinning up the GCP resources.
+A better practice to use both resources efficiently is to use Colab to ensure that the model is converging before spinning up the GCP resources.
 
 ### Key elements of GCP
 
-There are 3 basic elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM), and TPU.
+There are 3 key elements in GCP to run a machine learning (ML) model: bucket, virtual machine (VM), and TPU.
 
 #### Bucket
 
-[A bucket](https://cloud.google.com/storage/docs/key-terms#buckets) is a stable storage space to store data.
+A [bucket](https://cloud.google.com/storage/docs/key-terms#buckets) is a stable storage space to store data.
 
 #### Virtual Machine (VM)
 
-A [VM](https://cloud.google.com/compute/docs/instances) is an **expensive** operating system. We run machine learning Python programs from our VM's. Virtual machines can read the data from buckets to build an ML model. We can store the results of our model to buckets.
+A [VM](https://cloud.google.com/compute/docs/instances) is an **expensive** operating system. We run machine learning programs on our VMs. VMs can read data from buckets to build a machine learning model. We can store the results of our model to buckets.
 
 #### TPU
 
-[TPU](https://cloud.google.com/tpu/docs) is also **expensive**. When ML programs are run on VM's, the program uses TPU to accelerate computation for ML models.
+[TPU](https://cloud.google.com/tpu/docs) is also **expensive**. When we run machine learning programs on VMs, the programs use TPU(s) to accelerate computation.
 
-### Shutting down expensive elements!
+### Shut down expensive elements!
 
-As mentioned, VM's and TPU's are expensive. So we should <span style="color:red">shut down</span> TPU and VM when  we're not using them.
-*   We can shut them down using command lines or web interfaces manually. But we easily forget to do so.
-*   We will provide instructions on shutting them down automatically by [a script below](#automatic-shutdown).
+As mentioned, VMs and TPUs are expensive. So we should **<span style="color:red">shut down</span>** TPUs and VMs when we're not using them.
+*   We can shut them down using command lines or through web interfaces manually. However, we might forget to do so, and result in unnecessary spending.
+*   We also provide instructions on shutting them down automatically by [a script below](#automatic-shutdown).
 
 ## Create and configure account
 
-This section will contain detailed procedures to sign up for the first time and configuring projects. Upgrading accounts and adding people to projects for collaboration will also be mentioned.
+This section contains detailed procedures to create a GCP account and configuring projects. Upgrading accounts and adding people to projects for collaboration are also mentioned.
 
-### Sign up to GCP for the first time
+### Create your first GCP account
 
-You should receive credits worth $300 from Google when you first sign up with your personal Gmail address and upgrade to a full account. Please use the resources judiciously.
+A GCP account grants you access to all Cloud Platform Products. When you sign up on GCP and upgrade to a full account, you should receive $300 credits from Google over the next 12 months. Please use the resources judiciously.
 
-1. Create Google Cloud account by going to the [Google Cloud homepage](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2015-q2-cloud-na-gcp-skws-freetrial-en&gclid=CP2e4PPpiNMCFU9bfgodGHsA1A "Title"). Click on the blue **Get Started for free** button. Sign in your Gmail account. Here is an illustrative example.
+1. Create Google Cloud account by going to the [Google Cloud homepage](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=2015-q2-cloud-na-gcp-skws-freetrial-en&gclid=CP2e4PPpiNMCFU9bfgodGHsA1A "Title"). Click on the blue **Get Started for Free** button. Sign in to your Gmail account.
 
 ![](_img/launching-screen.png)
 
-2. Choose **Account type** to be **Individual**. You will then fill in your name, address, and credit card information.
+2. Select **Account type** to be **Individual**. You will then fill in your name, address, and credit card information.
 
 ![](_img/register-info.png)
 
-3. Click the "Google Cloud Platform" (in red circle), and it will take you to the main project dashboard.
+3. Click the **Google Cloud Platform**, and it will take you to the main project dashboard.
 
 ![](_img/welcome-screen.png)
 
@@ -109,11 +109,7 @@ gcloud config set project ${PROJECT_NAME}
 
 #### Create your own VM
 
-Please pay attention to `zone`. Select a zone that is not used by too many people.
-
-You can see what zones are used by other people by the following navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar -> zones.
-
-You can see the set of zone names by the following navigation: Console page -> Compute Engine -> “Zones” in the left sidebar. Pick up a name from here.
+You can use the following command to create a VM instance named transformer-tutorial in Cloud Shell.
 
 
 ```bash
@@ -127,7 +123,15 @@ ctpu up --vm-only \
 
 Enter `y` to approve the creation of VM.
 
-<a name="vm-zone"></a> Please remember the zone information in the above command `us-central1-b`. It will be used later when we create TPU.
+Enter `y` to approve the creation of VM.
+
+Please pay attention to `--zone`. Select a zone that is not used by too many people:
+
+- You can see what zones are used by other people by the following navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar -> zones.
+
+- You can see the set of zone names by the following navigation: Console page -> Compute Engine -> “Zones” in the left sidebar. Pick up a name from here.
+
+Please remember the zone information in the above command `us-central1-b`. It will be used later when we create TPU.
 
 Now the VM is created and started. **The start of the VM triggers the start of charging fees, until the VM is shutdown**.
 
@@ -139,19 +143,19 @@ gcloud compute ssh transformer-tutorial --zone=us-central1-b
 
 It will ask you to create a rsa key pair for yourself. Just create one.
 
-### Access Your Newly Created VM 
+### Access your newly created VM 
 
-Now that you have created your virtual GCE, you want to be able to connect to it from your computer.
+Now that you have created your Virtual Machine using Cloud Shell, you may also want to connect to it from your computer.
 
-### Install gcloud command-line Tools
-To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, install [Google Cloud SDK](https://cloud.google.com/sdk/docs) that is appropriate for your platform, and follow their instructions. 
+### Install gcloud command-line tools
+To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, follow the instructions to install [Google Cloud SDK](https://cloud.google.com/sdk/docs). 
 
 If the `gcloud` command is not in your system path after installation, you can also reference it by its full path `/<DIRECTORY-WHERE-GOOGLE-CLOUD-IS-INSTALLED>/bin/gcloud`. See [this page](https://cloud.google.com/compute/docs/instances/connecting-to-instance "Title") for more detailed instructions.
 
 To ssh into your VM, go to your VM instance details page by clicking on its name. Start the VM instance first. Once it has a green checkmark on, click on the drop-down arrow and select `View gcloud command` instead to retrieve the terminal command. It should look like
 
 ```bash
-gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "<YOUR_ZONE>" "<YOUR_VM_NAME>"
+gcloud compute ssh --project <YOUR_PROJECT_ID> --zone <YOUR_ZONE> <YOUR_VM_NAME>
 ```
 
 ### Verification
@@ -163,9 +167,9 @@ If you have GPU enabled, you should be able to:
 * If you want to use Tensorflow 2.1, run `python test_tf.py`. The script will show you the installed Tensorflow version (2.1.0) and then run a sample MNIST training. You should see around 97% accuracy at the end.
 
 ### Using Jupyter Notebook with Google Compute Engine 
-If you wish, you can use Jupyter Notebook to experiment in your projects. Below, we discuss how to run Jupyter Notebook from your GCE instance and connect to it with your local browser.
+You can use Jupyter Notebook to experiment for your projects. In this section, we discuss how to run Jupyter Notebook from your GCE instance and connect to it with your local browser.
 
-After you ssh into your VM using the prior instructions, run Jupyter notebook from the folder with your assignment files.
+After you ssh into your VM, run Jupyter notebook from the folder with your project files.
 
 ```
 jupyter notebook
@@ -173,16 +177,7 @@ jupyter notebook
 
 The default port is `8888`, specified in `~/.jupyter/jupyter_notebook_config.py`.
 
-You can connect to your Jupyter session from your laptop. Check the external IP address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
-
-
-### Transferring Files From Your Instance To Your Computer
-
-For instance, to transfer `file.zip` from GCE instance to your local laptop. There is an [easy command](https://cloud.google.com/sdk/gcloud/reference/compute/scp) for this purpose:
-
-```
-gcloud compute scp <user>@<instance-name>:/path/to/file.zip /local/path
-```
+You can connect to your Jupyter Notebook session from your laptop. Check the external IP address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
 
 ### Creating a bucket
 
@@ -296,17 +291,17 @@ gcloud compute instances stop transformer-tutorial --zone=us-central1-b
 
 #### By web interface
 
-You can also shutdown TPU and VM using the web console interface.
+You can also shut down TPU and VM using the web console interface:
 
-By this navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 3 minutes to make sure that "transformer-tutorial" **disappears** from this page.
+- Shut down **TPU** by this navigation: Console page -> Compute Engine -> “TPUs” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 3 minutes to make sure that "transformer-tutorial" **disappears** from this page.
 
-By this navigation: Console page -> Compute Engine -> “VM instances” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 2 minutes to make sure that the status of "transformer-tutorial" becomes **grey** on this page.
+- Shut down **VM** by this navigation: Console page -> Compute Engine -> “VM instances” in the left sidebar, you can select "transformer-tutorial" and click "STOP". You should wait for around 2 minutes to make sure that the status of "transformer-tutorial" becomes **grey** on this page.
 
 ### Automatic shutdown
 
 It’s better to let the model run at the backend of the VM, so you don’t need to maintain the connection to VM all the time.
 
-The results can be printed in the log, or stored into VM or GCS buckets.
+The results can be printed in the log, or stored into VM or GCP buckets.
 
 What we are doing here is to put all commands we mentioned into a [bash script](https://www.cyberciti.biz/faq/how-to-execute-a-shell-script-in-linux/): demo.sh
 
@@ -359,9 +354,11 @@ After editing the demo.sh, we go back to the cloud shell and execute the followi
 ```bash
 printf 'y\n' | nohup ./demo.sh &> ~/demo.log &
 ```
-Now you have shut down TPU and VM. Your VM is not deleted. You can start your VM in the future to see your script and Python log in your root directory. What is the correct way to start VM and TPU the next time?
+Now you have shut down TPU and VM. Your VM is not deleted. You can start your VM in the future to see your script and Python log in your root directory.
 
 ### Start VM and TPU the next time
+
+You can use the following command to restart your VM and TPU.
 
 TPU:
 
@@ -374,7 +371,7 @@ VM:
 gcloud compute instances start transformer-tutorial --zone=us-central1-b
 ```
 
-You have started VM. Then you need to use SSH to login/access your VM.
+After you start your VM, you can use SSH to login/access your VM.
 
 Login VM:
 
@@ -396,6 +393,6 @@ Besides `gcloud compute scp`, another tool you can check out is [rsync](https://
 
 ## REMINDER: Make sure you stop your instances!
 
-Don't forget to stop your instance when you are done (by clicking on the stop button at the top of the page showing your instances, or by the other methods listed above). You can restart your instance and the downloaded software will still be available.
+Don't forget to stop your instance when you are done (by clicking on the stop button at the top of the page showing your instances, or by the [other methods](#automatic-shutdown) listed above). You can restart your instance and the downloaded software will still be available.
 
 You will be charged per hour when your instance is running. This includes code development time. We encourage you to read up on Google Cloud and regularly keep track of your credits.
